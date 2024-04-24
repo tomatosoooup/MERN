@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Я використав для sku тип String та cuid() адже так айді в усіх продуктах будуть однакової довжини. У випадку з Int, як би ми вийшли за його розиір, могли б бути проблеми.
+// Але то якщо б в нам було ну дуууже багато продуктів
+// Замість @unique використав @id адже він і так унікальний
+
+model Product {
+  sku        String     @id @default(cuid())
+  title      String
+  categories Category[] @relation("ProductCategories")
+  stocks     Stock[]    @relation("ProductStocks")
+}
+
+model Category {
+  slug     String    @id @default(cuid())
+  title    String
+  products Product[] @relation("ProductCategories")
+}
+
+model Stock {
+  uuid     String    @id @default(uuid())
+  title    String
+  products Product[] @relation("ProductStocks")
+}

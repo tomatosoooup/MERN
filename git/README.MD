@@ -1,0 +1,2 @@
+I would stash my chages with `git stash` if my current branch is task_4 and than use `git pull origin dev`. After that I would type `git stash apply` and check if there are no conflicts. If so - I have to solve them. After all work done I can use `git add .` + `git commit -m 'message'` to save changes. If I wanna push them to MAIN my steps would be -
+`git fetch origin main:main`, `gei merge origin/main` and `git push origin task_4`
